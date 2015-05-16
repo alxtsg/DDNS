@@ -2,7 +2,7 @@
 
 ## Description ##
 
-A simple Node.js application for updating DDNS record on Namecheap.
+A simple Node.js application for updating DNS record on Namecheap.
 
 ## Requirements ##
 
