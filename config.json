@@ -1,0 +1,7 @@
+{
+  "host": "@",
+  "domain": "example.com",
+  "password": "YOUR_PASSWORD",
+  "log": "ddns.log",
+  "updateInterval": 3600
+}
