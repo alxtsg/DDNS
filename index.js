@@ -15,7 +15,7 @@
 
     decoder = new StringDecoder('utf8'),
 
-    // Interval between updating DDNS record, in milliseconds.
+    // Interval between updating DNS record, in milliseconds.
     updateInterval = 0,
 
     // Path to log file.
@@ -71,16 +71,19 @@
     },
 
     /*
-      Updates DDNS record.
+      Updates DNS record.
     */
     updateRecord = function(){
-      var request = https.request(requestOptions, function(response){
-            // Actual status is included in response body as an XML document.
-            writeLog(util.format('Status code: %d', response.statusCode));
-            response.on('data', function(data){
-              writeLog(decoder.write(data));
-            });
+      var date = new Date(),
+        responseHandler = function(response){
+          writeLog(date.toISOString());
+          // Actual status is included in response body as an XML document.
+          writeLog(util.format('Status code: %d', response.statusCode));
+          response.on('data', function(data){
+            writeLog(decoder.write(data));
           });
+        },
+        request = https.request(requestOptions, responseHandler);
       request.end();
       request.on('error', function(error){
         writeLog(util.format('Error: %s', error));
@@ -88,13 +91,14 @@
     },
 
     /*
-      Updates DDNS record periodically.
+      Updates DNS record periodically.
     */
     startPeriodicUpdate = function(){
+      updateRecord();
       setInterval(updateRecord, updateInterval);
     };
 
-  // Read configuration file and start updating DDNS record periodically.
+  // Read configuration file and start updating DNS record periodically.
   fs.readFile('config.json', {
     encoding: 'utf8'
   }, function(error, data){
