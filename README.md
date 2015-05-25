@@ -6,7 +6,7 @@ A simple Node.js application for updating DNS record on Namecheap.
 
 ## Requirements ##
 
-* Node.js 0.10.35 or above.
+* Node.js (tested with 0.10.35).
 
 ## Installation ##
 
@@ -17,8 +17,8 @@ A simple Node.js application for updating DNS record on Namecheap.
 
 The configuration file `config.json` controls the following:
 
-* `host`: The subdomain of domain, use `@` for the domain itself.
-* `domain`: The domain, e.g. `example.com`.
+* `host`: The subdomain of domain, use `"@"` for the domain itself.
+* `domain`: The domain, e.g. `"example.com"`.
 * `password`: The password for updating DNS record.
 * `log`: The file name of log file.
 * `updateInterval`: The update interval of DNS record, in seconds, e.g. `3600` for updating every 1 hour.
