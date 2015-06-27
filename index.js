@@ -1,8 +1,8 @@
-/*
-  Main program.
-
-  @author alextsang@live.com
-*/
+/**
+ * Main program.
+ *
+ * @author alextsang@live.com
+ */
 (function(){
 
   'use strict';
@@ -27,11 +27,11 @@
     // HTTPS request options.
     requestOptions = null,
 
-    /*
-      Parses configuration file.
-
-      @param data Configuration data.
-    */
+    /**
+     * Parses configuration file.
+     *
+     * @param {string} data Configuratil file content, must be in JSON.
+     */
     parseConfig = function(data){
       try{
         var config = JSON.parse(data);
@@ -56,11 +56,11 @@
       }
     },
 
-    /*
-      Writes message to log file.
-
-      @param message Log message.
-    */
+    /**
+     * Writes message to log file.
+     *
+     * @param {string} message Log message.
+     */
     writeLog = function(message){
       message += '\n';
       fs.appendFile(logFilePath, message, function(error){
@@ -70,9 +70,9 @@
       });
     },
 
-    /*
-      Updates DNS record.
-    */
+    /**
+     * Updates DNS record.
+     */
     updateRecord = function(){
       var date = new Date(),
         responseHandler = function(response){
@@ -90,9 +90,9 @@
       });
     },
 
-    /*
-      Updates DNS record periodically.
-    */
+    /**
+     * Starts periodical DNS update.
+     */
     startPeriodicUpdate = function(){
       updateRecord();
       setInterval(updateRecord, updateInterval);
