@@ -6,12 +6,11 @@ A simple Node.js application for updating DNS record on Namecheap.
 
 ## Requirements ##
 
-* Node.js (tested with 0.10.35).
+* Node.js (`>=4.3.0`).
 
 ## Installation ##
 
-0. Install Node.js.
-1. Start the application by `node index.js`.
+0. `node index.js`.
 
 ## Usage ##
 
