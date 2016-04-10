@@ -1,9 +1,9 @@
 /**
  * Main program.
  *
- * @author alextsang@live.com
+ * @author Alex Tsang <alextsang@live.com>
  */
-(function(){
+(function () {
 
   'use strict';
 
@@ -32,7 +32,7 @@
      *
      * @param {string} data Configuratil file content, must be in JSON.
      */
-    parseConfig = function(data){
+    parseConfig = function (data) {
       try{
         var config = JSON.parse(data);
         queryParamString = queryString.stringify({
@@ -49,7 +49,7 @@
           path: '/update?' + queryParamString,
           method: 'GET'
         };
-      }catch(error){
+      }catch (error) {
         console.error(
           util.format('Unable to parse configuratiln file: %s', error));
         process.exit(1);
@@ -61,10 +61,10 @@
      *
      * @param {string} message Log message.
      */
-    writeLog = function(message){
+    writeLog = function (message) {
       message += '\n';
-      fs.appendFile(logFilePath, message, function(error){
-        if(error !== null){
+      fs.appendFile(logFilePath, message, function (error) {
+        if (error !== null) {
           console.error('Unable to write log.');
         }
       });
@@ -73,19 +73,19 @@
     /**
      * Updates DNS record.
      */
-    updateRecord = function(){
+    updateRecord = function () {
       var date = new Date(),
-        responseHandler = function(response){
+        responseHandler = function (response) {
           writeLog(date.toISOString());
           // Actual status is included in response body as an XML document.
           writeLog(util.format('Status code: %d', response.statusCode));
-          response.on('data', function(data){
+          response.on('data', function (data) {
             writeLog(decoder.write(data));
           });
         },
         request = https.request(requestOptions, responseHandler);
       request.end();
-      request.on('error', function(error){
+      request.on('error', function (error) {
         writeLog(util.format('Error: %s', error));
       });
     },
@@ -93,7 +93,7 @@
     /**
      * Starts periodical DNS update.
      */
-    startPeriodicUpdate = function(){
+    startPeriodicUpdate = function () {
       updateRecord();
       setInterval(updateRecord, updateInterval);
     };
@@ -101,8 +101,8 @@
   // Read configuration file and start updating DNS record periodically.
   fs.readFile('config.json', {
     encoding: 'utf8'
-  }, function(error, data){
-    if(error !== null){
+  }, function (error, data) {
+    if (error !== null) {
       console.error('Unable to read configuration file.');
       process.exit(1);
     }
