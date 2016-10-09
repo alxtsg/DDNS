@@ -4,6 +4,8 @@
 
 A simple Node.js application for updating DNS record on Namecheap.
 
+__This application is no longer being maintained.__
+
 ## Requirements ##
 
 * Node.js (`>=4.3.0`).
